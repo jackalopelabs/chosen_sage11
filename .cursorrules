@@ -53,8 +53,8 @@ If we're not using Radicle, and the project is empty (other than this file)– t
 - Build theme assets: `cd sage && npm install && npm run build`
 – Install alpine.js `npm install alpinejs --save`
 - Go to Trellis and run: `trellis init`
-- Install Galaxy Roles: `cd trellis && trellis galaxy install`
-- Install Trellis: `trellis vm start`
+- From Trellis, install Ansible Galaxy roles: `trellis galaxy install`
+- Start the Trellis/Lima VM (which will provision development): `trellis vm start`
 - Align Lima VM with /etc/hosts and SSH Config (instructions below)
 - Configure `site/wp-cli.yml` to use the @development, @staging, and @production aliases
 - Activate Sage 11: `wp @development theme activate sage`
@@ -89,45 +89,6 @@ If I were working on my project called Chosen with a [sitename]=`chosen.bonsai.s
 @production:
   ssh: web@chosen.bonsai.so/srv/www/chosen.bonsai.so/current
 ```
-
-Configuring Trellis for deployment:
-
-On Digital Ocean:
-- Spin up droplet or instances for servers with Ubuntu 22.04
-- Grab the public IP addresses from new droplets
-- Add A record in DNS settings for desired domain
-- Add IP to local hosts file: sudo `vim ~/../../etc/hosts`
-- Add IP to local ssh config file: `sudo vim ~/.ssh/config`
-- SSH into your servers to verify connection is working
-
-If I tell you that I want to configure for staging or production deployment this is what I want you to do–
-
-For staging:
-
-- Make sure group_vars/staging/wordpress_sites.yml is set to `main` not `master` branch
-- Don't forget hosts/staging.yml host name set to the [sitename]
-- Generate a random secure password and save it as .vault_pass
-- add path in ansible.cfg: `vault_password_file = .vault_pass`
-- `trellis vault encrypt`
-- Pause for a moment so that I can commit to Github manually
-- `trellis provision staging`
-- `trellis deploy staging`
-
-Potential deployment issues & fixes:
-
-If staging deploy failed, SSH into the newest release and run–
-
-`wp core install --url=bonsai.so --title=Bonsai --admin_user=masoninthesis --admin_password=admin --admin_email=mason@bonsai.so --allow-root`
-
-Then redploy– `trellis deploy staging`
-
-If that fails because of a permission error, ssh into the server and run–
-
-`cd /srv/www/staging.bonsai.so/releases && sudo chown -R web:www-data *`
-
-Uncomment out 'Run Acorn optimize' in the `trellis/deploy-hooks/build-after.yml` for the first deployment
-
-If acorn fails on build-after, then we might need to comment out trellis/deploy-hooks/build-after.yml 'Run Acorn optimize' for the first deployment. Then re-deploy– `trellis deploy staging`
 
 Aligning Lima VM with /etc/hosts and SSH Config:
 
@@ -179,3 +140,42 @@ Aligning Lima VM with /etc/hosts and SSH Config:
    - Ensure domain in hosts file matches SSH config exactly
 
 The key is ensuring the port in your SSH config matches the current Lima VM port, and that your domain in /etc/hosts points to 127.0.0.1.
+
+Configuring Trellis for deployment:
+
+On Digital Ocean:
+- Spin up droplet or instances for servers with Ubuntu 22.04
+- Grab the public IP addresses from new droplets
+- Add A record in DNS settings for desired domain
+- Add IP to local hosts file: sudo `vim ~/../../etc/hosts`
+- Add IP to local ssh config file: `sudo vim ~/.ssh/config`
+- SSH into your servers to verify connection is working
+
+If I tell you that I want to configure for staging or production deployment this is what I want you to do–
+
+For staging:
+
+- Make sure group_vars/staging/wordpress_sites.yml is set to `main` not `master` branch
+- Don't forget hosts/staging.yml host name set to the [sitename]
+- Generate a random secure password and save it as .vault_pass
+- add path in ansible.cfg: `vault_password_file = .vault_pass`
+- `trellis vault encrypt`
+- Pause for a moment so that I can commit to Github manually
+- `trellis provision staging`
+- `trellis deploy staging`
+
+Potential deployment issues & fixes:
+
+If staging deploy failed, SSH into the newest release and run–
+
+`wp core install --url=bonsai.so --title=Bonsai --admin_user=masoninthesis --admin_password=admin --admin_email=mason@bonsai.so --allow-root`
+
+Then redploy– `trellis deploy staging`
+
+If that fails because of a permission error, ssh into the server and run–
+
+`cd /srv/www/staging.bonsai.so/releases && sudo chown -R web:www-data *`
+
+Uncomment out 'Run Acorn optimize' in the `trellis/deploy-hooks/build-after.yml` for the first deployment
+
+If acorn fails on build-after, then we might need to comment out trellis/deploy-hooks/build-after.yml 'Run Acorn optimize' for the first deployment. Then re-deploy– `trellis deploy staging`
