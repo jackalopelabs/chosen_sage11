@@ -47,13 +47,14 @@ If we are using Radicle, then Trellis will be missing. That is one of the first 
 
 If we're not using Radicle, and the project is empty (other than this file)– this will be your operating procedure, which is different than the Radicle process.
 
-- Install Trellis and Bedrock: `trellis new [sitename]` (Give this a minute to run before re-trying. If this command isn't found, try running– `brew install roots/tap/trellis-cli`)
+- Install Trellis and Bedrock: `trellis new [sitename]` (Give this a minute to run before re-trying. If this command isn't found, try running– `brew install roots/tap/trellis-cli`) Make sure this process is complete before moving on.
 - Move the contents (site + app) of [projectname]/[sitename] into the project root: `mv chosen.bonsai.so/site chosen.bonsai.so/trellis . && rmdir chosen.bonsai.so`
 - Install Sage 11: `cd site/web/app/themes && composer create-project roots/sage`
 - Build theme assets: `cd sage && npm install && npm run build`
 – Install alpine.js `npm install alpinejs --save`
-- From Trellis, install Ansible Galaxy roles: `trellis galaxy install` or `ansible-galaxy install -f -r galaxy.yml newrelic` (Make sure you verify this is done before moving on)
-- Start Lima VM (which will provision development): `trellis vm start`
+- From Trellis, install Ansible Galaxy roles: `trellis galaxy install` or `ansible-galaxy install -f -r galaxy.yml` (Make sure you verify this is installed before moving on)
+- Manually create the virtual environment and install Ansible `rm -rf .trellis/virtualenv && mkdir -p .trellis/virtualenv && python3 -m venv .trellis/virtualenv && .trellis/virtualenv/bin/pip install ansible`
+- Start Lima VM (which will provision development): `trellis vm start` (Make sure this completes before moving on)
 - Align Lima VM with /etc/hosts and SSH Config (instructions below)
 - Configure `site/wp-cli.yml` to use the @development, @staging, and @production aliases
 - Activate Sage 11: `wp @development theme activate sage` (make sure this completes before moving on, run it /site directory, not project root)
