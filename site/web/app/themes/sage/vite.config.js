@@ -31,9 +31,6 @@ export default defineConfig({
         'resources/js/editor.js',
       ],
       refresh: true,
-      publicDirectory: 'public',
-      buildDirectory: 'build',
-      assetsDirectory: 'assets',
     }),
 
     wordpressPlugin(),
@@ -52,14 +49,6 @@ export default defineConfig({
       '@styles': '/resources/css',
       '@fonts': '/resources/fonts',
       '@images': '/resources/images',
-    },
-  },
-  build: {
-    assetsInlineLimit: 0,
-    rollupOptions: {
-      input: {
-        app: 'resources/js/app.js',
-      },
     },
   },
 })

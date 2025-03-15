@@ -2,13 +2,13 @@
 <html @php(language_attributes()) x-data="globalData" class="relative h-screen">
     <!-- Hero Background Images -->
     <div class="absolute inset-0 z-0">
-        <img src="@images/chosen_hero_03.webp"
+        <img src="{{ Vite::asset('resources/images/chosen_hero_03.webp') }}"
                 alt="Background Light"
                 class="w-full h-full object-cover object-top opacity-100"
                 style="display: none;"
                 x-bind:style="!darkMode ? 'display: block;' : 'display: none;'"
         />
-        <img src="@images/chosen_hero_01.webp" 
+        <img src="{{ Vite::asset('resources/images/chosen_hero_01.webp') }}" 
                 alt="Background Dark" 
                 class="w-full h-full object-cover object-top opacity-100"
                 style="display: block;"
