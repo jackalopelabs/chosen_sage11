@@ -47,12 +47,12 @@ If we are using Radicle, then Trellis will be missing. That is one of the first 
 
 If we're not using Radicle, and the project is empty (other than this file)– this will be your operating procedure, which is different than the Radicle process.
 
-- Install Trellis and Bedrock: `trellis new [sitename]` (If this command isn't found, try running– `brew install roots/tap/trellis-cli`)
+- Install Trellis and Bedrock: `trellis new [sitename]` (Give this a minute to run before re-trying. If this command isn't found, try running– `brew install roots/tap/trellis-cli`)
 - Move the contents (site + app) of [projectname]/[sitename] into the project root: `mv chosen.bonsai.so/site chosen.bonsai.so/trellis . && rmdir chosen.bonsai.so`
 - Install Sage 11: `cd site/web/app/themes && composer create-project roots/sage`
 - Build theme assets: `cd sage && npm install && npm run build`
 – Install alpine.js `npm install alpinejs --save`
-- Go to Trellis and run: `trellis init`
+- Go to Trellis and run: `trellis init --force` (Make sure this complete before moving on. If you get `Error installing dependencies` we gotta fix it first. Do not update ansible to fix. Try ` python3 -m venv .trellis/virtualenv`)
 - From Trellis, install Ansible Galaxy roles: `trellis galaxy install` or `ansible-galaxy install -f -r galaxy.yml newrelic` (Make sure you verify this is done before moving on)
 - Start the Trellis/Lima VM (which will provision development): `trellis vm start`
 - Align Lima VM with /etc/hosts and SSH Config (instructions below)
@@ -118,10 +118,11 @@ Aligning Lima VM with /etc/hosts and SSH Config:
    nano ~/.ssh/config
    ```
    Add or update entry (replace PORT with the number from step 2):
+   Make sure that there are not duplicate entries, if there are remove the outdated one. For the [your-username], find the system username and use that.
    ```
    Host your-domain.test
      HostName 127.0.0.1
-     User your-username
+     User [your-username]
      Port PORT
      IdentityFile ~/.lima/_config/user
      IdentityFile ~/.ssh/id_ed25519
@@ -140,6 +141,8 @@ Aligning Lima VM with /etc/hosts and SSH Config:
    - Ensure domain in hosts file matches SSH config exactly
 
 The key is ensuring the port in your SSH config matches the current Lima VM port, and that your domain in /etc/hosts points to 127.0.0.1.
+
+When complete, try to ssh into the dev environment `ssh [sitename-tld.test]`. If it fails, then re-run this step until you can ssh in successfully. Do not attempt to re-provision the server.
 
 Configuring Trellis for deployment:
 
