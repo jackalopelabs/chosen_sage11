@@ -63,7 +63,7 @@ If we're not using Radicle, and the project is empty (other than this file)– t
 – `wp @development acorn optimize:clear`
 – `wp @development acorn bonsai:init` (bonsai.sh is then added to the project, and it should already be executable)
 – Bonsai Generate: `cd web/app/themes/sage && ./scripts/bonsai.sh acorn bonsai:generate chosen`
-- Run dev process `yarn dev`
+- Run dev process `npm run build`
 
 This is how you configure `site/wp-cli.yml` to use the @development, @staging, and @production aliases:
 

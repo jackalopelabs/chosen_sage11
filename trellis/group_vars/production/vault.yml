@@ -1,0 +1,21 @@
+# Created by trellis-cli v1.13.0
+# Documentation: https://roots.io/trellis/docs/vault/
+
+vault_mysql_root_password: mLoDndFfXFwG83zM3DMKGekaHDX2QnS4nKEMYwLGbD0eFM3WKHNHB41lkOpKXtPf
+vault_users:
+- name: '{{ admin_user }}'
+  password: dcNnAO1c5DpRjN5Bxa7fKJdpggVARPHacaCHze6Wucpc94BGOJkUltfHpYhoerEG
+  salt: IBYbIvvAY2dvGiA3PtUjqtMT3DNp0mzxlDeGrZqTBJH2paJXavU9d2H0cilIPiuh
+vault_wordpress_sites:
+  chosen.bonsai.so:
+    admin_password: pgYtrSAmXkULEqdaihyEoSQRsku2CilNk2dXA8X8fe5G08hE1XrQZPYKwkaaBS8d
+    env:
+      db_password: 0C9hClWbTJG1aT3hao0vbHx90loUTpkLqkDLur6juSnc6BvA556kxPgNAuamgIEM
+      auth_key: UO3yWbcYWitYXXqTyRAFeBZE4Y9fNEdmOfBQsPVKCllkooT2Rjlzq3wYtooPJOEi
+      secure_auth_key: Q8NCIvNkoagI8yaJm7XmqxeTelgp8JsDVsoccRM1of4lvl4VH79Ok7yFV9Dbe4DQ
+      logged_in_key: QnXAGk1rsbgtxhftzF8Wu5B8wCx9tv12ENmpulCbL9sSVaBpCuQdFvnoetWI5V7E
+      nonce_key: dqld0TbtjPUkNEbTCQUBGkrrdj58S9frLu1tcl9H9kQ8PIp3ILoz0wlGkbZfSzmN
+      auth_salt: ga8NkWe7R9gwgPHG55UeeWueguFgm65tQ1wK8Sa7RRLdfaZ1ux7bfJF1gii4IIgo
+      secure_auth_salt: 3htYqeCoV6WYYZlHpSEAHrldYglkO5dztsdcF8df1lVxalQbpqnrBjTdWD3vIYQ6
+      logged_in_salt: INQZsLcNf4ZH9S1CfzksSSxr9FCV5EDSePVnykOva7fvaoQ7KHcC5MqxdpH2xNlI
+      nonce_salt: XrUjYkGMxQO5d5hbS1wncT0fpZtFMp0SveCfX5kcRKnI8yGP617b5PxwR5cAO6Ug
