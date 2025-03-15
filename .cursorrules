@@ -93,6 +93,8 @@ If I were working on my project called Chosen with a [sitename]=`chosen.bonsai.s
 
 Aligning Lima VM with /etc/hosts and SSH Config:
 
+Before starting make sure that the etc/hosts and .ssh/config are completely empty. Do NOT move forward until this is done.
+
 1. **Add sudoers rule** (one-time setup):
    ```bash
    trellis vm sudoers | sudo tee /etc/sudoers.d/trellis
