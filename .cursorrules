@@ -53,11 +53,11 @@ If we're not using Radicle, and the project is empty (other than this file)– t
 - Build theme assets: `cd sage && npm install && npm run build`
 – Install alpine.js `npm install alpinejs --save`
 - Go to Trellis and run: `trellis init`
-- From Trellis, install Ansible Galaxy roles: `trellis galaxy install`
+- From Trellis, install Ansible Galaxy roles: `trellis galaxy install` or `ansible-galaxy install -r galaxy.yml` (Make sure you verify this is done before moving on)
 - Start the Trellis/Lima VM (which will provision development): `trellis vm start`
 - Align Lima VM with /etc/hosts and SSH Config (instructions below)
 - Configure `site/wp-cli.yml` to use the @development, @staging, and @production aliases
-- Activate Sage 11: `wp @development theme activate sage`
+- Activate Sage 11: `wp @development theme activate sage` (make sure this completes before moving on, run it /site directory, not project root)
 - Go to the `site` directory and config Bonsai CLI: `composer config repositories.bonsai-cli vcs git@github.com:jackalopelabs/bonsai-cli.git`
 - Now require it: `composer require jackalopelabs/bonsai-cli:dev-kanban`
 – `wp @development acorn optimize:clear`
